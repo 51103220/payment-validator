@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-validator
+spec:
+  ports:
+  - name: http
+    port: 8080
+  selector:
+    app: payment-validator
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-validator
+  labels:
+    app: payment-validator
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-validator
+  template:
+    metadata:
+      labels:
+        app: payment-validator
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8080'
+        prometheus.io/path: '/actuator/prometheus'
+    spec:
+      containers:
+        - name: payment-validator
+          image: payment-validator:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "300Mi"
+              cpu: "100m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m" 

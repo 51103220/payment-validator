@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.sacombank.payment;
+option java_multiple_files = true;
+option java_package = "com.sacombank.payment.domain.protobuf";
+
+service PaymentRuleValidatorService {
+    rpc Validate (PaymentRuleValidateRequest) returns (PaymentRuleValidateResponse) {
+    }
+}
+
+message PaymentRuleValidateRequest  {
+	string RequestId = 1;
+	string Timestamp = 2;
+	string ProcessingCode = 3;
+	string MTI = 4;
+
+	string SourceAccount = 5;
+	string SourceType = 6;
+
+	string DestAccount = 7;
+	string DestType = 8;
+	string Amount = 9;
+
+}
+
+message PaymentRuleValidateResponse {
+	string RequestId = 1;
+	string ResponseCode = 2;
+	bool Valid = 3;
+	string Description = 4;
+}
