@@ -5,12 +5,14 @@ import com.sacombank.payment.domain.PaymentRuleIn;
 import com.sacombank.payment.domain.PaymentRuleOut;
 
 import org.apache.logging.log4j.LogManager;
+import org.springframework.stereotype.Component;
 
 import io.micrometer.core.annotation.Timed;
 import io.micrometer.core.instrument.Metrics;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.extension.annotations.WithSpan;
 
+@Component
 public class PaymentRuleService implements IPaymentRuleService {
     private static final org.apache.logging.log4j.Logger logger = LogManager.getLogger(PaymentRuleService.class);
 
