@@ -24,7 +24,7 @@ public class PaymentRuleValidatorGrpcServer extends PaymentRuleValidatorServiceI
     @Override
     public void validate(PaymentRuleValidateRequest request,
             StreamObserver<PaymentRuleValidateResponse> responseObserver) {
-        logger.debug("receive request from requestId={}" ,request.getRequestId());
+        logger.debug("requestId={} receive payment validator request" ,request.getRequestId());
         
         var ruleIn = new PaymentRuleIn();
         ruleIn.setRequestId(request.getRequestId());
